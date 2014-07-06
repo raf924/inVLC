@@ -1,0 +1,20 @@
+#searchDiv, #searchDiv div{
+	margin-right: 1em;
+}
+
+.window-action#restore:hover, .window-action#expand:hover, .window-action#hide:hover{
+	background-color: rgb(54,101,179);
+}
+.window-action{
+	font-family: Marlett;
+}
+.window-action:hover{
+	color:white;
+}
+
+.window-action-pull-right{
+	margin-top: -10px;
+}
+body{
+	overflow: hidden;
+}
