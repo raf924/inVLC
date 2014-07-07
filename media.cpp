@@ -36,6 +36,7 @@ void Media::registerEvents()
 void Media::processEvent(const libvlc_event_t * e, void *data)
 {
     qDebug()<<libvlc_event_type_name(e->type);
+    Media * media = (Media *)data;
     switch (e->type) {
     case libvlc_MediaMetaChanged:
         break;
