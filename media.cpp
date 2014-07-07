@@ -35,5 +35,23 @@ void Media::registerEvents()
 
 void Media::processEvent(const libvlc_event_t * e, void *data)
 {
-
+    qDebug()<<libvlc_event_type_name(e->type);
+    switch (e->type) {
+    case libvlc_MediaMetaChanged:
+        break;
+    case libvlc_MediaDurationChanged:
+        break;
+    case libvlc_MediaSubItemAdded:
+        break;
+    case libvlc_MediaFreed:
+        break;
+    case libvlc_MediaStateChanged:
+        break;
+    case libvlc_MediaSubItemTreeAdded:
+        break;
+    case libvlc_MediaParsedChanged:
+        break;
+    default:
+        break;
+    }
 }
