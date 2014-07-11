@@ -8,7 +8,7 @@ WebInterface::WebInterface(QObject *parent) :
 {
 }
 
-void WebInterface::action(const QMap<QString,QVariant> &actionData)
+void WebInterface::action(const QVariantMap &actionData)
 {
     qDebug()<<actionData.value("action")<<actionData.value("data");
     QString action = actionData.value("action").toString();

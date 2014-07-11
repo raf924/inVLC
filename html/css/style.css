@@ -5,16 +5,74 @@
 .window-action#restore:hover, .window-action#expand:hover, .window-action#hide:hover{
 	background-color: rgb(54,101,179);
 }
-.window-action{
+.btn.window-action{
 	font-family: Marlett;
+	font-weight: bold;
+	font-size: 1.3em;
+	padding-top: 0;	
+	padding-bottom: 0;
+	padding-left: 5px;
+	padding-right: 5px;
 }
+
+.window-action:last-child{
+	padding-left: 1.1em;
+	padding-right: 1.1em;
+}
+
 .window-action:hover{
 	color:white;
 }
 
 .window-action-pull-right{
-	margin-top: -10px;
+	margin-top: -1px;
+	margin-right: 5px;
 }
 body{
 	overflow: hidden;
+	font-size: 1.3em;
+	margin: 0;
+	background-color: white; 
+}
+
+#seeker-slider .slider-handle{
+	background:rgb(213,213,213);
+	outline: none;
+	border-radius: 10%;
+	width:5px;
+	margin-left: 0;
+	box-shadow:0px 0px 5px rgb(50,50,50);
+}
+
+#seeker-slider .slider-selection{
+	background: #737475;
+}
+
+#seeker-slider .slider-track{
+	background: rgb(210,210,210);
+}
+
+.menubar{
+	background-color: rgba(147, 147, 147, 0.11)
+}
+
+.menubar li a:hover{
+	background-color: rgb(50,50,50);
+	color:white;
+}
+
+.metadata-well{
+	text-align: center;
+}
+.metadata#title{
+	font-size: 1.1em;
+	margin-bottom: -1px;
+}
+.metadata#album, .metadata#artist{
+	font-size: 1em;
+	font-weight: 100;
+}
+
+#seeker-slider{
+	width: 75%;
 }

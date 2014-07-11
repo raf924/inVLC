@@ -25,9 +25,9 @@ public:
     Media  *media();
     qint64 getTime();
     qint64 getLength();
-    QMap<libvlc_meta_t, QString> getMetaData();
     void setVideoOutput(QWidget * w);
     ~Player();
+    libvlc_media_player_t * getPlayer(){return _mediaPlayer;}
 
 public slots:
     void play();
@@ -37,7 +37,7 @@ public slots:
     void setVolume(const QVariant & volume);
 
 private:
-    libvlc_media_player_t *_player;
+    libvlc_media_player_t *_mediaPlayer;
     libvlc_event_manager_t * _em;
     EventList _events;
     Media * _media;
@@ -49,8 +49,7 @@ signals:
     void mediaStatusChanged(MediaStatus);
     void stateChanged(State);
     void lengthChanged(qint64);
-    void metaDataChanged(QMap<libvlc_meta_t, QString>);
-
+    void metaDataParsed(const QVariantMap &);
 };
 
 #endif // PLAYER_H

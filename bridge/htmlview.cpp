@@ -27,12 +27,6 @@ HtmlView::HtmlView(QWidget *parent) :
     connect(_interface,SIGNAL(close()),this,SLOT(close()));
 }
 
-void HtmlView::setPlayer(Player *player)
-{
-    _player = player;
-    connect(_interface,SIGNAL(seek(const QVariant &)),player,SLOT(seek(const QVariant &)));
-    connect(_player,SIGNAL(metaDataChanged(QMap<libvlc_meta_t,QString>)),this,SLOT(updateMetaData(QMap<libvlc_meta_t,QString>)));
-}
 
 void HtmlView::resizeEvent(QResizeEvent *e)
 {
@@ -50,11 +44,4 @@ void HtmlView::changeEvent(QEvent *e)
 void HtmlView::addInterface()
 {
     _view->page()->mainFrame()->addToJavaScriptWindowObject("interface",_interface);
-}
-
-void HtmlView::updateMetaData(const QMap<libvlc_meta_t, QString> &metaData)
-{
-    foreach (libvlc_meta_t tag, metaData.keys()) {
-        qDebug()<<metaData.value(tag);
-    }
 }

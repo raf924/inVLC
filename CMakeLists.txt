@@ -15,6 +15,9 @@ find_package(LIBVLC REQUIRED libvlc)
 file(STRINGS ${LIBVLC_INCLUDE_DIR}/vlc/libvlc_version.h VERSIONVLC REGEX "^[ \t]*#[ \t]*define[ \t]+LIBVLC_VERSION_[A-Z]+[ \t]*[(][0-9]+[)].*$")
 
 aux_source_directory(. SRC_LIST)
+aux_source_directory(core SRC_LIST)
+aux_source_directory(bridge SRC_LIST)
+aux_source_directory(library SRC_LIST)
 
 #aux_source_directory(ui UIS)
 

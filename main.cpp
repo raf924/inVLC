@@ -1,26 +1,24 @@
-#include "htmlview.h"
-#include "player.h"
+#include "bridge/htmlview.h"
+#include "core/player.h"
 
 #include <QApplication>
 #include <QtCore>
 
 #include <iostream>
+#include "application.h"
+
+#include "bridge/router.h"
 
 using namespace std;
 
 int main(int argc, char * argv[])
 {
     QApplication a(argc, argv);
-    HtmlView hv;
-    hv.webView()->page()->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
-    QWebInspector inspector;
-    inspector.setPage(hv.webView()->page());
-    inspector.setVisible(true);
-    hv.showMaximized();
-    Player p;
-    hv.setPlayer(&p);
-    p.setMedia(new Media("CCXL.mp3"));
-    p.play();
+    //Application * app = new Application;
+    Router * router = new Router;
+    Router * router2 = new Router;
+    router->addRoute("action", router2,"debug");
+    router->route("action");
     return a.exec();
 }
 

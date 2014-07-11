@@ -1,10 +1,19 @@
 #include "medialistplayer.h"
+#include <QDebug>
 
-MediaListPlayer::MediaListPlayer(QObject *parent) :
+
+MediaListPlayer::MediaListPlayer(Player *p, QObject *parent) :
     QObject(parent)
 {
     _mediaListPlayer = libvlc_media_list_player_new(VlcInstance::load()->instance());
+    libvlc_media_list_player_set_media_player(_mediaListPlayer,p->getPlayer());
     _events = VlcInstance::load()->mediaListPlayerEvents();
+}
+
+void MediaListPlayer::setMediaList(MediaList *list)
+{
+    _list = list;
+    libvlc_media_list_player_set_media_list(_mediaListPlayer,_list->getMediaList());
 }
 
 MediaListPlayer::~MediaListPlayer()

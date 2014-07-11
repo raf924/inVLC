@@ -3,17 +3,12 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="slider/css/bootstrap-slider.min.css">
     <link rel="stylesheet" href="css/style.css" />
     <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="slider/js/bootstrap-slider.min.js"></script>
     <script src="js/app.js"></script>
-    <style type="text/css">
-        body { margin: 0; font-size: 2em; background-color: white; }
-        h1 { text-align: center; color: red; }
-        h1 + h1 { color: green; }
-        h1:last-child { color: blue; }
-        #quit { background-color: gray; color: white; font-weight: bold; display: block; text-align: right; }
-    </style>
 </head>
 <body>
     <nav class="navbar navbar-default navbar-static-top" role="navigation">
@@ -33,19 +28,30 @@
                 <div class="col-md-3">
                     <span class="glyphicon glyphicon-backward"></span>
                 </div>
-                <div class="col-md-6">
-
-                </div>
                 <div class="col-md-1">
+                    
+                </div>
+                <div class="col-md-4">
+                    <div class="well metadata-well">
+                        <label class="metadata" id="title"></label>
+                        <br>
+                        <label class="metadata" id="artist"></label>--<label class="metadata" id="album"></label>
+                        <br>
+                        <label id="elapsed"></label>
+                        <input type="text" id="seeker" class="span2" value="5">
+                        <label id="total"></label>
+                    </div>
+                </div>
+                <div class="col-md-2">
                     
                 </div>
                 <div class="col-md-2">
                     <div class="pull-right window-action-pull-right">
                         <div class="btn-group btn-group-sm window-action-btn-group">
-                            <button class="btn btn-default window-action" data-action="hide" id="hide" aria-hidden="true">0</button>
-                            <button class="btn btn-default window-action" data-action="restore" id="restore" aria-hidden="true">1</button>
-                            <button class="btn btn-default window-action" data-action="expand" id="expand" aria-hidden="true">2</button>
-                            <button class="btn btn-danger window-action" data-action="close" id="close" aria-hidden="true">r</button>
+                            <button class="window-action btn btn-default" data-action="hide" id="hide" aria-hidden="true">0</button>
+                            <button class="window-action btn btn-default" data-action="restore" id="restore" aria-hidden="true">1</button>
+                            <button class="window-action btn btn-default" data-action="expand" id="expand" aria-hidden="true">2</button>
+                            <button class="window-action btn btn-danger" data-action="close" id="close" aria-hidden="true">r</button>
                         </div>
                     </div>
                     <div id="searchDiv" class="pull-right">
@@ -58,17 +64,19 @@
                     </div>
                 </div>
             </div>
-            <ul class="nav navbar-nav navbar-left">
+            <div class="menubar row">
+                <ul class="nav navbar-nav navbar-left">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Fichiers<b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Fichier<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Ouvrir un fichier</a></li>
-                        <li><a href="#">Ajouter un fichier à la bibliothèque</a></li>
-                        <li><a href="#">Ajouter un dossier à la bibliothèque</a></li>
-                        <li><a href="#">Quitter</a></li>
+                        <li><a href="inVLC:///openFile">Ouvrir un fichier</a></li>
+                        <li><a href="inVLC:///addFile">Ajouter un fichier à la bibliothèque</a></li>
+                        <li><a href="inVLC:///addFolder">Ajouter un dossier à la bibliothèque</a></li>
+                        <li><a href="inVLC:///close">Quitter</a></li>
                     </ul>
                 </li>
             </ul>
+            </div>
         </div><!-- /.navbar-collapse -->
         <form action="" class="navbar-form navbar-right navbar-toggle">
             <div class="btn-group window-action-btn-group">

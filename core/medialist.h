@@ -11,6 +11,7 @@ class MediaList : public QObject
     Q_OBJECT
 public:
     explicit MediaList(QObject *parent = 0);
+    libvlc_media_list_t * getMediaList(){return _mediaList;}
     void insertMedia(Media *media, const int & index);
     void addMedia(Media *media);
     void removeMedia(int index);

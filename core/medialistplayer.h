@@ -4,12 +4,14 @@
 #include <QObject>
 #include <vlc/vlc.h>
 #include "medialist.h"
+#include "player.h"
 
 class MediaListPlayer : public QObject
 {
     Q_OBJECT
 public:
-    explicit MediaListPlayer(QObject *parent = 0);
+    explicit MediaListPlayer(Player * p, QObject *parent = 0);
+    void setMediaList(MediaList * list);
     ~MediaListPlayer();
 signals:
 
@@ -19,6 +21,7 @@ private:
     static void processEvent(const libvlc_event_t * event, void *data);
     void registerEvents();
     libvlc_media_list_player_t * _mediaListPlayer;
+    MediaList * _list;
 
 };
 

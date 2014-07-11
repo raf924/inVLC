@@ -4,8 +4,8 @@ VlcInstance *VlcInstance::_vlc = NULL;
 
 VlcInstance::VlcInstance()
 {
-    //char * args[] = {"-vvv"};
-    _instance = libvlc_new(0,NULL);
+    char * args[] = {"-vvv"};
+    _instance = libvlc_new(0,args);
     _mediaEvents <<libvlc_MediaMetaChanged
               <<libvlc_MediaSubItemAdded
               <<libvlc_MediaDurationChanged
