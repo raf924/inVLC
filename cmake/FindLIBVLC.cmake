@@ -38,7 +38,7 @@ PATHS
     "/usr/local/include"
     "/usr/local/include/vlc"
     #mingw
-    "D:/Programes/VLC/sdk/include"
+    "C:/Program Files (x86)/VideoLAN/VLC/sdk/include"
     "c:/msys/local/include"
 )
 find_path(LIBVLC_INCLUDE_DIR PATHS "${CMAKE_INCLUDE_PATH}/vlc" NAMES vlc.h 
@@ -51,7 +51,7 @@ HINTS "$ENV{LIBVLC_LIBRARY_PATH}" ${PC_LIBVLC_LIBDIR} ${PC_LIBVLC_LIBRARY_DIRS}
 PATHS
     "$ENV{LIB_DIR}/lib"
     #mingw
-    "D:/Programes/VLC/sdk/lib"
+    "C:/Program Files (x86)/VideoLAN/VLC/sdk/lib"
     "c:/msys/local/lib"
 )
 find_library(LIBVLC_LIBRARY NAMES vlc libvlc)
@@ -60,7 +60,7 @@ HINTS "$ENV{LIBVLC_LIBRARY_PATH}" ${PC_LIBVLC_LIBDIR} ${PC_LIBVLC_LIBRARY_DIRS}
 PATHS
     "$ENV{LIB_DIR}/lib"
     #mingw
-    "D:/Programes/VLC/sdk/lib"
+    "C:/Program Files (x86)/VideoLAN/VLC/sdk/lib"
     "c:/msys/local/lib"
 )
 find_library(LIBVLCCORE_LIBRARY NAMES vlccore libvlccore)

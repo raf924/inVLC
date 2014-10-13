@@ -11,8 +11,8 @@ class Library : public QObject
     Q_OBJECT
 public:
     explicit Library(QObject *parent = 0);
-    QList<QVariantMap> library();
-
+    Q_INVOKABLE QVariantList library();
+    Media *getSong(const int & id);
     void add(const QList<QVariantMap> & metaData);
 
     void add(Media * media);

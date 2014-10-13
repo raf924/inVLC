@@ -1,69 +1,89 @@
 $(function(){
-	try{
-		interface.restoreChanged.connect(changeIcon);
-		interface.lengthChanged.connect(changeLength);
-		interface.timeChanged.connect(changeTime);
-		interface.metaDataChanged.connect(changeMetaData);
-	}
-	catch(e)
-	{
-
-	}
+	$(document).on("invlc.window.restoreChanged", changeIcon);
+	$(document).on("invlc.player.lengthChanged",changeLength);
+	$(document).on("invlc.player.timeChanged",changeTime);
+	$(document).on("invlc.media.metaDataChanged", changeMetaData);
+	$(document).on("invlc.view.songListUpdated",updateView);
+	$(document).on("invlc.player.pause",updatePause);
+	$("#songList").on('click',function(e) {
+		$(".metadata").parent().removeClass("active");
+		$(e.target).parent().addClass("active")
+	}).on("dblclick",function (e) {
+		invlc.play($(e.target).parent().attr("id"));
+	});
 	$("#seeker").slider({
 		id:"seeker-slider",
 		tooltip:"hide",
 		handle:"square",
 		value:0,
 		formater : function (value) {
-			$("#elapsed").html(timeToString(value));
-			return timeToString(value);
+			$("#elapsed").html(invlc.timeToString(value));
+			return invlc.timeToString(value);
 		}
 	});
 	$(".window-action").each(function (index, item) {
 		$(item).click(function () {
-			interface.action({action:$(this).attr("id")});
+			invlc.action($(this).data("action"));
+		});
+	});
+	$(".player-action").each(function (index, item) {
+		$(item).click(function () {
+			invlc.action($(this).data("action"));
 		});
 	});
 	$("#seeker").on("slideStart",function () {
 		interface.timeChanged.disconnect(changeTime);
 	});
 	$("#seeker").on("slideStop",function () {
-		interface.action({action:"seek",data:$("#slider").slider("getValue")});
+		invlc.action("seek",$("#slider").slider("getValue"));
 		interface.timeChanged.connect(changeTime);
 	});
-	changeIcon();
+	$.each(invlc.tags, function (index, item) {
+		$("<th></th>").attr("id",item).html(item).appendTo("#tags");
+	});
+	invlc.songList();
 });
 
-function changeLength (length) {
+function changeLength (event, length) {
 	$("#seeker").slider('setAttribute',"max",length);
-	$("#total").html(timeToString(length));
-	changeMetaData(interface.nowPlaying);
+	$("#total").html(invlc.timeToString(length));
+	changeMetaData(invlc.nowPlaying);
 }
 
-function changeTime (time) {
+function changeTime (event, time) {
 	$("#seeker").slider("setValue",time,false);
-	$("#elapsed").html(timeToString(time));
+	$("#elapsed").html(invlc.timeToString(time));
 }
 
-function changeIcon (restore) {
-	$(".window-action#restore").css("display",restore?"":"none");
-	$(".window-action#expand").css("display",restore?"none":"");
+function changeIcon (event, restore) {
+	console.log("Changing icon");
+	$(".window-action#restore").css("display",!restore?"":"none");
+	$(".window-action#expand").css("display",!restore?"none":"");
 }
 
-function changeMetaData (metaData) {
-	//console.log(interface.nowPlaying);
-	$(".metadata").each(function (index,item) {
+function changeMetaData (event) {
+	var metaData = invlc.nowPlaying();
+	$(".info").each(function (index,item) {
 		var key = $(this).attr("id");
-		key = key.replace(/^[a-z]/g,key.charAt(0).toUpperCase());
-		console.log(key);
 		$(this).html(metaData[key]);	
 	});
 }
 
-function timeToString (value) {
-	var d = new Date(value);
-	var str = d.getHours()-1>0?(d.getHours()-1<10?"0":"")+d.getHours()-1+":":"";
-	str += (d.getMinutes()<10?"0":"")+d.getMinutes()+":";
-	str += (d.getSeconds()<10?"0":"")+d.getSeconds();
-	return str;
+function updateView (event, songList) {
+	$(".song-item").remove();
+	$.each(songList["songList"],function (index, song) {
+		$("<tr></tr>").attr("path",song.Path).attr("id",song.Id).addClass("song-item").appendTo("#songList");
+		$.each(invlc.tags, function (index, item) {
+			$("<td></td>").addClass("metadata").html(song[item]).appendTo("#"+song["Id"]);
+		});
+	});
+}
+
+function updatePause (event, isPaused) {
+	if(isPaused!=invlc.PLAYING){
+		$(".player-action > .glyphicon-pause").removeClass("glyphicon-pause").addClass("glyphicon-play");
+	}
+	else{
+		$(".player-action > .glyphicon-play").removeClass("glyphicon-play").addClass("glyphicon-pause");		
+	}
 }

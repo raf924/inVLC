@@ -8,16 +8,24 @@ Media::Media(QObject *parent):
     _media = NULL;
 }
 
+/**
+ * @brief Media::Media Constructs a Media Object from a URL (example : "file:///path/to/file.mp3")
+ * @param location : The URL encoded path of the file
+ */
+
 Media::Media(const QUrl &location)
 {
     _media = libvlc_media_new_location(VlcInstance::load()->instance(),location.toString().toUtf8().data());
     registerEvents();
+    qDebug()<<"Media created from url";
 }
 
 Media::Media(const QString &path)
 {
+    qDebug()<<"Creating media from path"<<path.toUtf8().data();
     _media = libvlc_media_new_path(VlcInstance::load()->instance(),path.toUtf8().data());
     registerEvents();
+    qDebug()<<"Media created from path";
 }
 
 QVariantMap Media::metaData()
@@ -57,7 +65,7 @@ void Media::registerEvents()
     }
     libvlc_media_parse(_media);
     for(int i = 0; i< 20;i++){
-        qDebug()<<libvlc_media_get_meta(_media,static_cast<libvlc_meta_t>(i));
+        //qDebug()<<libvlc_media_get_meta(_media,static_cast<libvlc_meta_t>(i));
     }
 }
 

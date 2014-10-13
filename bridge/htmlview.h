@@ -21,8 +21,10 @@ protected:
 
 signals:
 
-public slots:
+private slots:
     void addInterface();
+    void restore();
+    void expand();
 };
 
 #endif // HTMLVIEW_H

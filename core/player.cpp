@@ -1,9 +1,9 @@
 #include "player.h"
 #include "media.h"
 
-#include <QFileDialog>
 #include <QDebug>
-#include <QtQml>
+#include <QtWidgets>
+#include <windows.h>
 
 void Player::processEvent(const libvlc_event_t *event, void *ptr)
 {
@@ -18,6 +18,17 @@ void Player::processEvent(const libvlc_event_t *event, void *ptr)
         emit self->lengthChanged(self->getLength());
         break;
     case libvlc_MediaPlayerMediaChanged:
+        break;
+    case libvlc_MediaPlayerPaused:
+        qDebug()<<"Paused";
+        emit self->stateChanged(Paused);
+        break;
+    case libvlc_MediaPlayerPlaying:
+        qDebug()<<"Playing";
+        emit self->stateChanged(Playing);
+        break;
+    case libvlc_MediaPlayerStopped:
+        emit self->stateChanged(Stopped);
         break;
     }
 }

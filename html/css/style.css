@@ -5,7 +5,7 @@
 .window-action#restore:hover, .window-action#expand:hover, .window-action#hide:hover{
 	background-color: rgb(54,101,179);
 }
-.btn.window-action{
+.window-action-btn-group .btn.window-action{
 	font-family: Marlett;
 	font-weight: bold;
 	font-size: 1.3em;
@@ -15,7 +15,7 @@
 	padding-right: 5px;
 }
 
-.window-action:last-child{
+.window-action-btn-group .window-action:last-child{
 	padding-left: 1.1em;
 	padding-right: 1.1em;
 }
@@ -61,18 +61,32 @@ body{
 	color:white;
 }
 
-.metadata-well{
+.info-well{
 	text-align: center;
 }
-.metadata#title{
+.info#title{
 	font-size: 1.1em;
 	margin-bottom: -1px;
 }
-.metadata#album, .metadata#artist{
+.info#album, .info#artist{
 	font-size: 1em;
 	font-weight: 100;
 }
 
 #seeker-slider{
 	width: 75%;
+}
+
+#songList{
+	cursor: default;
+}
+
+.metadata{
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+	/* Required to make elements draggable in old WebKit */
+	-khtml-user-drag: element;
+	-webkit-user-drag: element;
 }

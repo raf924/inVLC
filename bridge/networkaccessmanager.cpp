@@ -8,8 +8,9 @@ NetworkAccessManager::NetworkAccessManager(QObject *parent) :
 
 QNetworkReply *NetworkAccessManager::createRequest(QNetworkAccessManager::Operation op, const QNetworkRequest &request, QIODevice *outgoingData)
 {
-    if(request.url().scheme()=="inVLC"){
-        qDebug()<<request.url().path()<<outgoingData->readAll();
+    qDebug()<<request.url();
+    if(request.url().scheme()=="invlc"){
+        qDebug()<<request.url().host();
         NetworkReply * reply = new NetworkReply(QNetworkAccessManager::createRequest(op,request));
         reply->open(QIODevice::ReadWrite);
         reply->setStatus(400,"OK");

@@ -25,12 +25,16 @@ HtmlView::HtmlView(QWidget *parent) :
     _view->setUrl(QUrl::fromLocalFile(QFileInfo("html/index.html").absoluteFilePath()));
     connect(_view->page()->mainFrame(),SIGNAL(javaScriptWindowObjectCleared()),this,SLOT(addInterface()));
     connect(_interface,SIGNAL(close()),this,SLOT(close()));
+    connect(_interface,SIGNAL(hide()),this,SLOT(showMinimized()));
+    connect(_interface,SIGNAL(restore()),this,SLOT(restore()));
+    connect(_interface,SIGNAL(expand()),this,SLOT(expand()));
+    setMinimumSize(600,500);
 }
 
 
 void HtmlView::resizeEvent(QResizeEvent *e)
 {
-    _view->resize(e->size());
+    _view->resize(e->size());//Resize view when window is resized
 }
 
 void HtmlView::changeEvent(QEvent *e)
@@ -44,4 +48,18 @@ void HtmlView::changeEvent(QEvent *e)
 void HtmlView::addInterface()
 {
     _view->page()->mainFrame()->addToJavaScriptWindowObject("interface",_interface);
+    QFile script(":/application.js");
+    if(script.open(QFile::ReadOnly))
+        _view->page()->mainFrame()->evaluateJavaScript(script.readAll());
+    script.close();
+}
+
+void HtmlView::restore()
+{
+    this->showNormal();
+}
+
+void HtmlView::expand()
+{
+    this->showMaximized();
 }

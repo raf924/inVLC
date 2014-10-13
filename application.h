@@ -22,6 +22,12 @@ private:
     Player * _player;
     Library * _library;
     QList<Playlist *> _playlists;
+private slots:
+    void sendSongList();
+    void addFile();
+    void openFile();
+    void addFolder();
+    void play(const int & id);
 
 };
 

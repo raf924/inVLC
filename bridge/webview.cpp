@@ -1,6 +1,5 @@
 #include "webview.h"
 #include <QDebug>
-#include <QtMultimediaWidgets>
 #include "networkaccessmanager.h"
 #include "page.h"
 
@@ -10,6 +9,7 @@ WebView::WebView(QGraphicsItem *item):
 {
     this->setPage(new Page());
     this->page()->setNetworkAccessManager(new NetworkAccessManager());
+    this->page()->setForwardUnsupportedContent(true);
 }
 
 void WebView::contextMenuEvent(QGraphicsSceneContextMenuEvent *e)

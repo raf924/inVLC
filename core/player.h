@@ -5,19 +5,20 @@
 #include "media.h"
 #include <QObject>
 
+enum MediaStatus : int{
+    EndOfMedia,
+    Buffering
+};
+enum State : int{
+    Playing=0,
+    Paused=1,
+    Stopped=2
+};
+
 class Player : public QObject
 {
     Q_OBJECT
-    enum MediaStatus{
-        EndOfMedia,
-        Buffering,
 
-    };
-    enum State{
-        Playing,
-        Paused,
-        Stoppped
-    };
 
 public:
     explicit Player(QObject *parent = 0);
